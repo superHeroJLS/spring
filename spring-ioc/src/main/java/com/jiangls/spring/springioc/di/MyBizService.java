@@ -11,6 +11,9 @@ import javax.annotation.Resource;
 @Service
 public class MyBizService {
 
+    /**
+     * @Resource is recommended
+     */
     @Resource
     private MyFuncService funcService;
 
