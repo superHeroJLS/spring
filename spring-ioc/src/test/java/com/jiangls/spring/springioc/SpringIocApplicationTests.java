@@ -12,7 +12,9 @@ import javax.annotation.Resource;
 import javax.naming.Context;
 
 /**
- * 可以通过属性classes指定Configuration类
+ * 可以通过{@code @SpringBootTest}的属性classes指定Configuration类。<br>
+ *
+ * {@code @TestInstance(TestInstance.Lifecycle.PER_CLASS)}使{@code @BeforeAll}方法不需要是static方法。
  */
 @SpringBootTest(classes = {DiConfig.class})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

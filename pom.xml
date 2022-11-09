@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-ioc</module>
+        <module>springboot</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
