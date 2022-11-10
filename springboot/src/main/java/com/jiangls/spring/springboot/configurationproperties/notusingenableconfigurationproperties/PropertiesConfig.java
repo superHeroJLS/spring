@@ -1,4 +1,4 @@
-package com.jiangls.spring.springboot.configurationproperties;
+package com.jiangls.spring.springboot.configurationproperties.notusingenableconfigurationproperties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

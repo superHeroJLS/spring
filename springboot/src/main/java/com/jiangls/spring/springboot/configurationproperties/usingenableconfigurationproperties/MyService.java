@@ -1,18 +1,20 @@
-package com.jiangls.spring.springboot.configurationproperties;
+package com.jiangls.spring.springboot.configurationproperties.usingenableconfigurationproperties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author Jiangls
  * @date 2022/11/8
  */
 @Service
-public class JianglsService {
+public class MyService {
 
-    @Autowired
-    private JianglsProperties properties;
+    @Resource
+    private MyProperties properties;
 
     @Value("${spring.application.name}")
     private String applicationName;
