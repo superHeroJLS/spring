@@ -31,6 +31,14 @@ public class EnableAutoConfig {
      *     <li>exclude：等价于{@code @EnableAutoConfiguration}的exclude属性，关闭特定的自定配置，及不实例化也不配置指定的*AutoConfiguration类</li>
      * </ol>
      *
+     * {@code @EnableAutoConfiguration}原理：
+     * <ol>
+     *     <li>{@code @EnableAutoConfiguration}关键功能是{@code @Import(AutoConfigurationImportSelector.class)}注解导入的配置功能，<br>
+     *      * AutoConfigurationImportSelector使用SpringFactoriesLoader. loadFactoryNames方法来描具有META-INF/spring.factories文件的jar<br>
+     *      * 包，而我们的spring-boot-autoconfigure.2.5.14.jar里就有一个个spring.factories文件，此文件中声明了一些自动配置。
+     *      </li>
+     *     <li>{@code @Import}属于Spring的注解，@Import注解的功能实际上是由Spring来实现的。</li>
+     * </ol>
      * @param args
      */
     public static void main(String[] args) {

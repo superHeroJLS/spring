@@ -1,8 +1,7 @@
-package com.jiangls.spring.springboot.configurationproperties.enableannotation;
+package com.jiangls.spring.springboot.enableannotation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +23,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class EnableAnnotationConfig {
 
     /**
+     * <b>我们要注意到{@code @Enable*}和{@code @Import}都属于Spring的注解，而非SpringBoot的注解</b><br><br>
+     *
      * {@code @Enable*}注解的工作原理，通过简单的{@code @Enable*}来开启一项功能的支持，从而避免自己配置大量的代码，大大降低使用难度。<br>
      * 那么这个神奇的功能的实现原理是什么呢?我们一起来研究一下。<br>
      * 通过观察这些@Enable*注解的源码，我们发现所有的注解都有一个@Import注解,{@code @Import}是用来导入配置类的，<br>
@@ -33,6 +34,7 @@ public class EnableAnnotationConfig {
      *     <li>依据条件选择配置类：{@code @EnableAsync}</li>
      *     <li>动态注册Bean：{@code @EnableAspectJAutoProxy}</li>
      * </ol>
+     * {@code @Import}又是如何实现的，是通过Spring的 <b>BeanFactoryPostProcessor</b> 来实现的
      *
      * @param args
      */
