@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -34,8 +35,8 @@ public class EnableAutoConfig {
      * {@code @EnableAutoConfiguration}原理：
      * <ol>
      *     <li>{@code @EnableAutoConfiguration}关键功能是{@code @Import(AutoConfigurationImportSelector.class)}注解导入的配置功能，<br>
-     *      * AutoConfigurationImportSelector使用SpringFactoriesLoader. loadFactoryNames方法来描具有META-INF/spring.factories文件的jar<br>
-     *      * 包，而我们的spring-boot-autoconfigure.2.5.14.jar里就有一个个spring.factories文件，此文件中声明了一些自动配置。
+     *      AutoConfigurationImportSelector使用SpringFactoriesLoader. loadFactoryNames方法来描具有META-INF/spring.factories文件的jar<br>
+     *      包，而我们的spring-boot-autoconfigure.2.5.14.jar里就有一个spring.factories文件，此文件中声明了一些自动配置。
      *      </li>
      *     <li>{@code @Import}属于Spring的注解，@Import注解的功能实际上是由Spring来实现的。</li>
      * </ol>
@@ -44,5 +45,14 @@ public class EnableAutoConfig {
     public static void main(String[] args) {
         ApplicationContext context =  SpringApplication.run(EnableAutoConfig.class, args);
         System.out.println(context);
+    }
+
+    @Bean
+    public InternalClass internalClass() {
+        return new InternalClass();
+    }
+
+    class InternalClass {
+
     }
 }

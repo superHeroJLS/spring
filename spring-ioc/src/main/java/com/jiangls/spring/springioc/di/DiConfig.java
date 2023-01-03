@@ -1,11 +1,16 @@
 package com.jiangls.spring.springioc.di;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 
 /**
  * @author Jiangls
@@ -21,11 +26,10 @@ import org.springframework.context.annotation.Configuration;
 public class DiConfig {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(DiConfig.class, args);
-        MyBizService bizService = context.getBean("myBizService", MyBizService.class);
-        bizService.greeting();
+        System.out.println(context);
 
         InnerClass ic = context.getBean("innerClass", InnerClass.class);
-        ic.greeting();
+        System.out.println(ic);
     }
 
     /**
@@ -37,9 +41,46 @@ public class DiConfig {
         return new InnerClass();
     }
 
-    static class InnerClass {
+    static class InnerClass implements DisposableBean{
+
+        public InnerClass() {
+        }
+
+        @PostConstruct
+        public void init() {
+            System.out.println("this is init method");
+        }
+
         public void greeting() {
             System.out.println("I am InnerClass!");
         }
+
+        @Override
+        public void destroy() throws Exception {
+            System.err.println("----------this is destroy method override Interface DisposableBean");
+        }
+
+        /**
+         * 这个方法在destroy()方法之前执行
+         */
+        @PreDestroy
+        public void des() {
+            System.err.println("----------this is custom des method annotated @PreDestroy");
+        }
     }
+
+    /**
+     * 自定义BeanFactoryPostProcessor，方法一定要加static，原因参考@Bean。不建议使用这种方式
+     */
+   /* @Bean
+    public static BeanFactoryPostProcessor bfpp() {
+        return new MyBeanFactoryPostProcessor();
+    }
+
+    static class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
+        @Override
+        public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+            System.out.println("my BeanFactoryPostProcessor");
+        }
+    }*/
 }
