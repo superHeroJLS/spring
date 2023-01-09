@@ -88,6 +88,13 @@ public class AopConfig {
         pf.setTarget(serviceATarget);
         // 接收advice、interceptor、advisor的bean name，传入参数的顺序就是代理对象增强的顺序
         pf.setInterceptorNames("mba1", "arai", "nmmpa");
+
+        // ProxyFactoryBean需要选择使用cglib动态代理还是jdk动态代理，需要针对每个ProxyFactoryBean实例进行配置
+        // true使用cglib动态代理，false使用jdk动态代理
+        pf.setProxyTargetClass(true);
+        // true使用cglib动态代理，false使用jdk动态代理
+        pf.setOptimize(true);
+
         return pf;
     }
 
