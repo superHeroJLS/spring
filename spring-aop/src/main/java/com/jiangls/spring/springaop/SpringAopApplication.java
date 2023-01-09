@@ -27,11 +27,6 @@ public class SpringAopApplication {
         System.out.println("start succcessful, context is " + context);
         System.out.println("context class is " + context.getClass().getSimpleName());
         System.out.println("context parent is " + context.getParent());
-
-        ServiceA serviceA = (ServiceA) context.getBean("serviceA");
-        serviceA.methodA("aaa");
-        System.out.println();
-        serviceA.methodB("bbb");
     }
 
 }

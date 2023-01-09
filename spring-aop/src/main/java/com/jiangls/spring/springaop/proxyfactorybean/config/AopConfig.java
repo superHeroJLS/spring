@@ -49,6 +49,15 @@ public class AopConfig {
          });
      }
 
+    /**
+     * 自定义Advisor
+     * <ol>
+     *     Advisor包括Pointcut和Advice
+     *     <li>Pointcut：切点定义</li>
+     *     <li>Advice：增强逻辑</li>
+     * </ol>
+     * @return
+     */
      @Bean
      public Advisor nmmpa() {
          MethodBeforeAdvice mba2 = new MethodBeforeAdvice() {
@@ -58,8 +67,9 @@ public class AopConfig {
              }
          };
          NameMatchMethodPointcutAdvisor advisor = new NameMatchMethodPointcutAdvisor();
-         // 只对methodA增强
+         // 切点：只对methodA增强
          advisor.addMethodName("methodA");
+         // 增强：自定义MethodBeforeAdvice实现
          advisor.setAdvice(mba2);
          return advisor;
      }
