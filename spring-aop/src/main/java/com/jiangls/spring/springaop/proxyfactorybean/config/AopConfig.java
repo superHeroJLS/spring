@@ -92,7 +92,6 @@ public class AopConfig {
         pf.setInterceptorNames("mba1", "arai", "nmmpa");
 
         // ProxyFactoryBean需要选择使用cglib动态代理还是jdk动态代理，需要针对每个ProxyFactoryBean实例进行配置
-        // 但如果目标对象ServiceA是接口，那不论如何设置使用的都是jdk动态代理
         // true使用cglib动态代理，false使用jdk动态代理。
         pf.setProxyTargetClass(true);
         // true使用cglib动态代理，false使用jdk动态代理
@@ -117,6 +116,7 @@ public class AopConfig {
         pf.setInterceptorNames("mba1", "arai", "nmmpa");
 
         // ProxyFactoryBean需要选择使用cglib动态代理还是jdk动态代理，需要针对每个ProxyFactoryBean实例进行配置
+        // 但如果目标对象ServiceB是类，那不论如何设置使用的都是cglib动态代理
         // true使用cglib动态代理，false使用jdk动态代理。
         pf.setProxyTargetClass(true);
         // true使用cglib动态代理，false使用jdk动态代理
