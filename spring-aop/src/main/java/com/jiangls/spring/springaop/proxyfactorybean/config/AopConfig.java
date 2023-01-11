@@ -1,6 +1,7 @@
 package com.jiangls.spring.springaop.proxyfactorybean.config;
 
 import com.jiangls.spring.springaop.proxyfactorybean.service.ServiceA;
+import com.jiangls.spring.springaop.proxyfactorybean.service.ServiceB;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
@@ -30,7 +31,7 @@ public class AopConfig {
          return new MethodBeforeAdvice() {
              @Override
              public void before(Method method, Object[] args, Object target) throws Throwable {
-                 System.out.println("this is mba1");
+                 System.out.println("this is MethodBeforeAdvice111");
              }
          };
      }
@@ -44,7 +45,7 @@ public class AopConfig {
          return new AfterReturningAdviceInterceptor(new AfterReturningAdvice() {
              @Override
              public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
-                 System.out.println("this is after returning advice interceptor");
+                 System.out.println("this is AfterReturningAdviceInterceptor.AfterReturningAdvice");
              }
          });
      }
@@ -63,12 +64,13 @@ public class AopConfig {
          MethodBeforeAdvice mba2 = new MethodBeforeAdvice() {
              @Override
              public void before(Method method, Object[] args, Object target) throws Throwable {
-                 System.out.println("this is mba2 advisor");
+                 System.out.println("this is Advisor.MethodBeforeAdvice222");
              }
          };
          NameMatchMethodPointcutAdvisor advisor = new NameMatchMethodPointcutAdvisor();
          // 切点：只对methodA增强
          advisor.addMethodName("methodA");
+         advisor.addMethodName("methodC");
          // 增强：自定义MethodBeforeAdvice实现
          advisor.setAdvice(mba2);
          return advisor;
@@ -90,7 +92,32 @@ public class AopConfig {
         pf.setInterceptorNames("mba1", "arai", "nmmpa");
 
         // ProxyFactoryBean需要选择使用cglib动态代理还是jdk动态代理，需要针对每个ProxyFactoryBean实例进行配置
+        // 但如果目标对象ServiceA是接口，那不论如何设置使用的都是jdk动态代理
+        // true使用cglib动态代理，false使用jdk动态代理。
+        pf.setProxyTargetClass(true);
         // true使用cglib动态代理，false使用jdk动态代理
+        pf.setOptimize(true);
+
+        return pf;
+    }
+
+    /**
+     * 代理对象的bean name：serviceB。 <br>
+     * 目标对象的bean name: serviceBTarget。 <br><br>
+     *
+     * 我们真正需要使用的是代理对象，代理对象对目标对象进行了增强。
+     * @param serviceBTarget
+     * @return
+     */
+    @Bean
+    public ProxyFactoryBean serviceB(ServiceB serviceBTarget) {
+        ProxyFactoryBean pf = new ProxyFactoryBean();
+        pf.setTarget(serviceBTarget);
+        // 接收advice、interceptor、advisor的bean name，传入参数的顺序就是代理对象增强的顺序
+        pf.setInterceptorNames("mba1", "arai", "nmmpa");
+
+        // ProxyFactoryBean需要选择使用cglib动态代理还是jdk动态代理，需要针对每个ProxyFactoryBean实例进行配置
+        // true使用cglib动态代理，false使用jdk动态代理。
         pf.setProxyTargetClass(true);
         // true使用cglib动态代理，false使用jdk动态代理
         pf.setOptimize(true);

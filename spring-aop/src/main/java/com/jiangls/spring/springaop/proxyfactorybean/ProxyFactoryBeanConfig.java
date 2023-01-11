@@ -1,6 +1,7 @@
 package com.jiangls.spring.springaop.proxyfactorybean;
 
 import com.jiangls.spring.springaop.proxyfactorybean.service.ServiceA;
+import com.jiangls.spring.springaop.proxyfactorybean.service.ServiceB;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
@@ -41,6 +42,12 @@ public class ProxyFactoryBeanConfig {
         serviceA.methodA("aaa");
         System.out.println();
         serviceA.methodB("bbb");
+        System.out.println();
+
+        ServiceB serviceB = (ServiceB) context.getBean("serviceB");
+        serviceB.methodC("ccc");
+        System.out.println();
+        serviceB.methodD("ddd");
     }
 
 }
