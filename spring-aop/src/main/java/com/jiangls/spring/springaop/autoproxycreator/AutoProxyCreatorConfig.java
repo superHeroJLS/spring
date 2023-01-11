@@ -8,8 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import javax.xml.ws.Service;
-
 /**
  * scanBasePackages默认扫描当前包和所有子包。<br><br>
  * @author jiangls
