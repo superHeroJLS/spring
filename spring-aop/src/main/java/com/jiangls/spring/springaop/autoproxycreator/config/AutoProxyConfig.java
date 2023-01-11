@@ -67,6 +67,7 @@ public class AutoProxyConfig {
         NameMatchMethodPointcutAdvisor advisor = new NameMatchMethodPointcutAdvisor();
         // 切点：只对method111增强
         advisor.addMethodName("method111");
+        advisor.addMethodName("method333");
         // 增强：自定义MethodBeforeAdvice实现
         advisor.setAdvice(mba2);
         return advisor;
