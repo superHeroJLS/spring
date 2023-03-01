@@ -23,27 +23,18 @@ public class MyController {
     private ApplicationContext applicationContext;
 
     @GetMapping("hello")
-    public String hello(@RequestParam(value = "key", required = false) String key,
+    public Vo hello(@RequestParam(value = "key", required = false) String key,
                         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @RequestParam(value = "dt", required = false) LocalDateTime dt,
-                        @RequestBody Dto dto) {
-        System.out.println("dto: " + dto.toString());
+                        @RequestBody Dto dto,
+                        @RequestHeader(value = "head", required = false) String head,
+                        ServletRequest req,
+                        ServletResponse resp) {
         System.out.println("key: " + key);
         System.out.println("dt: " + dt);
-
-        return "success";
-    }
-
-    @PostMapping("hello1")
-    public Vo hello1(@RequestParam(value = "key", required = false) String key,
-                     @RequestBody Dto dto,
-                     @RequestHeader(value = "head", required = false) String head,
-                     ServletRequest req,
-                     ServletResponse resp) {
-        System.out.println("key: " + key);
         System.out.println("dto: " + dto.toString());
         System.out.println("head: " + head);
-        System.out.println("req: " + req.getClass().getName());
-        System.out.println("resp: " + resp.getClass().getName());
+        System.out.println("req: " + req);
+        System.out.println("resp: " + resp);
 
         Vo vo = new Vo();
         vo.setId(dto.getId());
@@ -52,11 +43,18 @@ public class MyController {
         return vo;
     }
 
+    @PostMapping("hello1")
+    public String hello1(@RequestBody Dto dto) {
+        System.out.println("dto: " + dto.toString());
+
+        return "success";
+    }
+
     /**
      * 发生异常
      */
     @GetMapping("exception")
-    public Vo exception(@RequestParam(value = "key", required = false) String key, @RequestBody Dto dto) {
+    public Vo exception(@RequestParam(value = "key", required = false) String key) {
         if (true) {
             throw new RuntimeException("异常");
         }
