@@ -3,11 +3,13 @@ package com.jiangls.spring.springwebmvc.controller;
 import com.jiangls.spring.springwebmvc.model.Dto;
 import com.jiangls.spring.springwebmvc.model.Vo;
 import org.springframework.context.ApplicationContext;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import java.time.LocalDateTime;
 
 /**
  * @author Jiangls
@@ -21,9 +23,12 @@ public class MyController {
     private ApplicationContext applicationContext;
 
     @GetMapping("hello")
-    public String hello(@RequestParam(value = "key", required = false) String key, @RequestBody Dto dto) {
+    public String hello(@RequestParam(value = "key", required = false) String key,
+                        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @RequestParam(value = "dt", required = false) LocalDateTime dt,
+                        @RequestBody Dto dto) {
         System.out.println("dto: " + dto.toString());
         System.out.println("key: " + key);
+        System.out.println("dt: " + dt);
 
         return "success";
     }

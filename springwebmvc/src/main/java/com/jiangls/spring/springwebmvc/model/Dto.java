@@ -3,6 +3,8 @@ package com.jiangls.spring.springwebmvc.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
@@ -10,8 +12,11 @@ import java.time.LocalDateTime;
  * @date 2023/2/28
  */
 public class Dto {
+    @NotBlank(message = "id不能为空")
     private String id;
+    @NotBlank(message = "name不能为空")
     private String name;
+    @NotNull(message = "dt不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime dt;
 
