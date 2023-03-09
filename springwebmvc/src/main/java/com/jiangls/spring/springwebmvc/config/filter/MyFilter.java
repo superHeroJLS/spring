@@ -1,6 +1,5 @@
 package com.jiangls.spring.springwebmvc.config.filter;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -14,7 +13,6 @@ import java.io.IOException;
  * @author Jiangls
  * @date 2023/3/9
  */
-@Component
 public class MyFilter extends OncePerRequestFilter {
 
     @Override

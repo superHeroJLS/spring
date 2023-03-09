@@ -22,7 +22,7 @@ public class ServletFilterConfiguration {
         FilterRegistrationBean<MyFilter> bean = new FilterRegistrationBean<>();
         // 这里可以使用 new，也可以在 Filter 上加 @Component 注入进来
         bean.setFilter(new MyFilter());
-        bean.addUrlPatterns("/");
+        bean.addUrlPatterns("/*");
         bean.setName("myfilter");
         // 值越小，优先级越高
         bean.setOrder(99);
@@ -34,7 +34,7 @@ public class ServletFilterConfiguration {
         FilterRegistrationBean<MyFilter2> bean = new FilterRegistrationBean<>();
         // 这里可以使用 new，也可以在 Filter 上加 @Component 注入进来
         bean.setFilter(new MyFilter2());
-        bean.addUrlPatterns("/");
+        bean.addUrlPatterns("/*");
         bean.setName("myfilter2");
         // 值越小，优先级越高
         bean.setOrder(100);
