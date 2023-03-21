@@ -46,7 +46,7 @@ public class MyErrorController extends AbstractErrorController {
      * @param response
      * @return
      */
-    @RequestMapping(value = "errorhtml", produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "myerrorhtml", produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
         HttpStatus status = getStatus(request);
         Map<String, Object> model = Collections
@@ -61,7 +61,7 @@ public class MyErrorController extends AbstractErrorController {
      * @param request
      * @return
      */
-    @RequestMapping("error")
+    @RequestMapping("myerror")
     public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
         HttpStatus status = getStatus(request);
         if (status == HttpStatus.NO_CONTENT) {

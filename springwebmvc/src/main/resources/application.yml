@@ -12,5 +12,5 @@ server:
     include-exception: true
     include-binding-errors: always
     # 也可设置成/myerror/errorhtml
-    path: /myerror/error
+    path: /myerror/myerror
     include-stacktrace: never
